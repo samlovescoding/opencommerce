@@ -77,7 +77,7 @@ export default function Navbar({ setSidebar, sidebar }) {
                     </div>
                     <div className="user-info d-none d-md-block">
                       <div className="user-status">
-                        {beautifulRole(user.role) || "Guest"}
+                        {beautifulRole(user.type) || "Guest"}
                       </div>
                       <div className="user-name">
                         {user.name || "Unknown User"}

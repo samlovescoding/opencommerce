@@ -10,7 +10,7 @@ export default function Logout() {
   useEffect(() => {
     deleteUser();
     history.push("/login");
-  }, []);
+  }, [deleteUser, history]);
 
   return (
     <Auth>

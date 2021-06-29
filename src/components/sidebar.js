@@ -15,12 +15,12 @@ function Heading({ title, admin }) {
   );
 }
 
-function SidebarItem({ title, icon, to, children, badge, admin }) {
+function SidebarItem({ title, icon, to, children, badge, type }) {
   const { user } = useUser();
   const [open, setOpen] = useState(false);
   const history = useHistory();
 
-  if (admin && user.role !== "admin") return null;
+  if (type && type !== "user" && user.type !== type) return null;
 
   return (
     <li

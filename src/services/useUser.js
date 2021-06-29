@@ -1,5 +1,5 @@
 const getUser = () => {
-  const userJSON = localStorage.getItem("user");
+  const userJSON = localStorage.getItem("opencommerce.user");
   if (userJSON) {
     return JSON.parse(userJSON);
   }
@@ -7,7 +7,7 @@ const getUser = () => {
 };
 
 const hasUser = () => {
-  const userJSON = localStorage.getItem("user");
+  const userJSON = localStorage.getItem("opencommerce.user");
   if (userJSON) {
     return true;
   }
@@ -16,11 +16,11 @@ const hasUser = () => {
 
 const saveUser = (user) => {
   const userJSON = JSON.stringify(user);
-  localStorage.setItem("user", userJSON);
+  localStorage.setItem("opencommerce.user", userJSON);
 };
 
 const deleteUser = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("opencommerce.user");
 };
 
 const useUser = () => {

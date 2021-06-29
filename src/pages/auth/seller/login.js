@@ -1,13 +1,30 @@
-import { Link } from "react-router-dom";
-import Auth from "../../layouts/auth";
-import AuthInput from "../../components/auth-input";
+import { Link, useHistory } from "react-router-dom";
+import Auth from "../../../layouts/auth";
+import AuthInput from "../../../components/auth-input";
+import sweetError from "../../../services/sweetError";
+import api from "../../../services/api";
 import { Formik } from "formik";
+import useUser from "../../../services/useUser";
 
 export default function Login() {
+  const history = useHistory();
+  const { saveUser } = useUser();
+
   const initialValues = {
     email: "",
     password: "",
   };
+
+  async function onSubmit(values) {
+    try {
+      const response = await api.post("/seller/login", values);
+      saveUser(response);
+      history.push("/seller");
+    } catch (e) {
+      sweetError(e);
+    }
+  }
+
   return (
     <Auth>
       <div className="card">
@@ -16,11 +33,11 @@ export default function Login() {
             <div className="nk-block-head-content">
               <h4 className="nk-block-title">Sign-In</h4>
               <div className="nk-block-des">
-                <p>Access using your email and password</p>
+                <p>Access seller panel using your email and password</p>
               </div>
             </div>
           </div>
-          <Formik initialValues={initialValues}>
+          <Formik initialValues={initialValues} onSubmit={onSubmit}>
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <AuthInput
@@ -53,7 +70,8 @@ export default function Login() {
           </Formik>
           <div className="form-note-s2 text-center pt-4">
             {" "}
-            New on our platform? <Link to="/register">Create an account</Link>
+            New on our platform?{" "}
+            <Link to="/seller/register">Create an account</Link>
           </div>
           <div className="text-center pt-4 pb-3">
             <h6 className="overline-title overline-title-sap">
@@ -62,12 +80,12 @@ export default function Login() {
           </div>
           <ul className="nav justify-center gx-4">
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#/facebook">
                 Facebook
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#/google">
                 Google
               </a>
             </li>

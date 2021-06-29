@@ -1,24 +1,39 @@
-import { Link } from "react-router-dom";
-import Auth from "../../layouts/auth";
+import { Link, useHistory } from "react-router-dom";
+import Auth from "../../../layouts/auth";
 import { Formik } from "formik";
-import AuthInput from "../../components/auth-input";
+import AuthInput from "../../../components/auth-input";
+import api from "../../../services/api";
+import sweetError from "../../../services/sweetError";
 
 export default function Register() {
+  const history = useHistory();
+
   const initialValues = {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   };
+
+  async function onSubmit(values) {
+    try {
+      await api.post("/seller/register", values);
+      history.push("/seller/login");
+    } catch (e) {
+      sweetError(e);
+    }
+  }
+
   return (
     <Auth>
       <div className="card">
         <div className="card-inner card-inner-lg">
           <div className="nk-block-head">
             <div className="nk-block-head-content">
-              <h4 className="nk-block-title">Register Yourself</h4>
+              <h4 className="nk-block-title">Seller Registration</h4>
             </div>
           </div>
-          <Formik initialValues={initialValues}>
+          <Formik initialValues={initialValues} onSubmit={onSubmit}>
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <AuthInput
@@ -62,7 +77,8 @@ export default function Register() {
           </Formik>
           <div className="form-note-s2 text-center pt-4">
             {" "}
-            Already have an account ? <Link to="/login">Sign in instead</Link>
+            Already have an account ?{" "}
+            <Link to="/seller/login">Sign in instead</Link>
           </div>
         </div>
       </div>

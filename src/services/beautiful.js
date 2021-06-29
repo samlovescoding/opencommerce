@@ -1,9 +1,11 @@
 export const role = (role) => {
   switch (role) {
     case "user":
-      return "User";
+      return "Customer";
     case "admin":
       return "Administrator";
+    case "seller":
+      return "Seller";
     default:
       return "Guest";
   }

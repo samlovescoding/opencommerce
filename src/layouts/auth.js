@@ -1,6 +1,14 @@
+import { useEffect } from "react";
 import Footer from "../components/footer";
+import useTemplate from "../services/useTemplate";
 
 export default function Auth({ children }) {
+  const { setDarkMode } = useTemplate();
+
+  useEffect(() => {
+    setDarkMode(false);
+  }, [setDarkMode]);
+
   return (
     <div className="nk-app-root">
       <div className="nk-main ">
@@ -11,12 +19,12 @@ export default function Auth({ children }) {
                 <a href="/" className="logo-link">
                   <img
                     className="logo-light logo-img logo-img-lg"
-                    src="images/logo.png"
+                    src="/images/logo.png"
                     alt="logo"
                   />
                   <img
                     className="logo-dark logo-img logo-img-lg"
-                    src="images/logo-dark.png"
+                    src="/images/logo-dark.png"
                     alt="logo-dark"
                   />
                 </a>

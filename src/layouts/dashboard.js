@@ -3,15 +3,22 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import cx from "classnames";
+import useUser from "../services/useUser";
+import { useHistory } from "react-router-dom";
 
 export default function Dashboard({ children, fluid = true }) {
+  const history = useHistory();
   const [sidebar, setSidebar] = useState(false);
+  const { hasUser } = useUser();
 
   useEffect(() => {
     if (sidebar === true) {
       document.body.classList.add("nav-shown");
     } else {
       document.body.classList.remove("nav-shown");
+    }
+    if (!hasUser()) {
+      history.push("/");
     }
   }, [sidebar]);
 
