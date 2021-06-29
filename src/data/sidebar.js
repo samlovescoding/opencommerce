@@ -24,7 +24,7 @@ const sidebar = [
   heading("Products"),
   seller("Catalog", "bag-fill", "/seller/products/view"),
   seller("Add Product", "plus-circle-fill", "/seller/products/create"),
-  seller("Categories", "filter-fill", "/seller/category"),
+  seller("Categories", "filter-fill", "/seller/categories"),
   link("Orders", "list-thumb-alt-fill", "/seller/orders"),
   seller("Shop", "building-fill", "/seller/shop"),
 

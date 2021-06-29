@@ -4,6 +4,7 @@ const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const config = require("../services/vars");
+const verify = require("../middleware/verify");
 
 router.post("/login", async (req, res) => {
   try {
@@ -51,6 +52,24 @@ router.post("/register", async (req, res) => {
     });
 
     success(res, "Registered successfully");
+  } catch (e) {
+    error(res, e);
+  }
+});
+
+router.patch("/change-password", verify("seller"), async (req, res) => {
+  try {
+    const { currentPassword, password } = req.body;
+    const seller = req.seller;
+    const passwordVerified = await bcrypt.compare(
+      currentPassword,
+      seller.password
+    );
+    if (!passwordVerified)
+      throw ErrorResponse("Current password in incorrect.");
+    seller.password = await bcrypt.hash(password, 10);
+    await seller.save();
+    success(res, "Password updated");
   } catch (e) {
     error(res, e);
   }
