@@ -66,7 +66,7 @@ function mapSidebarItem(item, index) {
 export default function Sidebar({ setSidebar, sidebar }) {
   return (
     <div
-      className={cx("nk-sidebar nk-sidebar-fixed is-dark", {
+      className={cx("nk-sidebar nk-sidebar-fixed", {
         "nk-sidebar-active": sidebar,
       })}
       data-content="sidebarMenu"

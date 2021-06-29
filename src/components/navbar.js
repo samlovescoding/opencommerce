@@ -1,8 +1,18 @@
+import { useState, useEffect } from "react";
 import { role as beautifulRole } from "../services/beautiful";
+import useTemplate from "../services/useTemplate";
 import useUser from "../services/useUser";
+import cx from "classnames";
 
 export default function Navbar({ setSidebar, sidebar }) {
   const { user } = useUser();
+  const { setDarkMode: setDarkModeClass } = useTemplate();
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    setDarkModeClass(darkMode);
+  }, [darkMode, setDarkModeClass]);
 
   return (
     <div className="nk-header nk-header-fixed is-light">
@@ -39,6 +49,26 @@ export default function Navbar({ setSidebar, sidebar }) {
 
           <div className="nk-header-tools">
             <ul className="nk-quick-nav">
+              <li className="hide-mb-xs">
+                <div
+                  className={cx("click nk-quick-nav-icon", {
+                    active: darkMode,
+                  })}
+                  onClick={() => {
+                    setDarkMode(!darkMode);
+                  }}
+                >
+                  <div className="icon-status icon-status-na">
+                    <em
+                      className={cx(
+                        "icon ni",
+                        { "ni-sun": darkMode },
+                        { "ni-sun-fill": !darkMode }
+                      )}
+                    ></em>
+                  </div>
+                </div>
+              </li>
               <li>
                 <a href="/password">
                   <div className="user-toggle">
