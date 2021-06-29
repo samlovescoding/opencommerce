@@ -1,8 +1,11 @@
 const router = require("express").Router();
-const authenticated = require("../middleware/authenticated");
-const { success, error } = require("../services/response");
+const express = require("express");
+const path = require("path");
 
 router.use("/seller", require("./seller"));
 router.use("/admin", require("./admin"));
+router.use("/product", require("./product"));
+router.use("/image", require("./image"));
+router.use("/uploads", express.static(path.join("api", "uploads")));
 
 module.exports = router;

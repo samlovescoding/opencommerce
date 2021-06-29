@@ -5,6 +5,10 @@ const api = axios.create({
   baseURL: config.api,
 });
 
+api.image = (url) => {
+  return new URL("/uploads/" + url, config.api);
+};
+
 function mapResponseData(response) {
   if (response.data.error) {
     console.log(response.data.error);

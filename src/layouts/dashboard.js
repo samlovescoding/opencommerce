@@ -5,11 +5,12 @@ import Sidebar from "../components/sidebar";
 import cx from "classnames";
 import useUser from "../services/useUser";
 import { useHistory } from "react-router-dom";
+import api from "../services/api";
 
 export default function Dashboard({ children, fluid = true }) {
   const history = useHistory();
   const [sidebar, setSidebar] = useState(false);
-  const { hasUser } = useUser();
+  const { hasUser, user } = useUser();
 
   useEffect(() => {
     if (sidebar === true) {
@@ -19,6 +20,11 @@ export default function Dashboard({ children, fluid = true }) {
     }
     if (!hasUser()) {
       history.push("/");
+    } else {
+      api.interceptors.request.use((config) => {
+        config.headers = { ...config.headers, authorization: user.token };
+        return config;
+      });
     }
   }, [sidebar]);
 

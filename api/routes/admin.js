@@ -41,13 +41,11 @@ router.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const admin = await Admin.create({
+    await Admin.create({
       name,
       email,
       password: hashedPassword,
     });
-
-    await admin.save();
 
     success(res, "Registered successfully");
   } catch (e) {

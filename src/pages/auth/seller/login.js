@@ -18,6 +18,10 @@ export default function Login() {
   async function onSubmit(values) {
     try {
       const response = await api.post("/seller/login", values);
+      api.interceptors.request.use((config) => {
+        config.headers = { ...config.headers, authorization: response.token };
+        return config;
+      });
       saveUser(response);
       history.push("/seller");
     } catch (e) {

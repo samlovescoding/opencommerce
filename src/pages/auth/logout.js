@@ -9,7 +9,7 @@ export default function Logout() {
 
   useEffect(() => {
     deleteUser();
-    history.push("/login");
+    history.push("/");
   }, [deleteUser, history]);
 
   return (
@@ -38,11 +38,11 @@ export default function Logout() {
                 <p>Please wait while we log you out.</p>
               </div>
               <button
-                onClick={() => history.push("/login")}
+                onClick={() => history.push("/")}
                 className="btn btn-lg btn-primary btn-block mt-5"
               >
-                <div class="spinner-border text-dark" role="status">
-                  <span class="sr-only">Loading...</span>
+                <div className="spinner-border text-dark" role="status">
+                  <span className="sr-only">Loading...</span>
                 </div>
               </button>
             </div>

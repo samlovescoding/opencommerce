@@ -90,8 +90,8 @@ export default function Sidebar({ setSidebar, sidebar }) {
           </a>
         </div>
         <div className="nk-sidebar-brand">
-          <a href="html/index.html" className="logo-link nk-sidebar-logo">
-            <img
+          <a href="/" className="logo-link nk-sidebar-logo">
+            {/* <img
               className="logo-light logo-img"
               src="/images/logo.png"
               alt="logo"
@@ -100,7 +100,8 @@ export default function Sidebar({ setSidebar, sidebar }) {
               className="logo-dark logo-img"
               src="/images/logo-dark.png"
               alt="logo-dark"
-            />
+            /> */}
+            <h5>Open Commerce</h5>
           </a>
         </div>
       </div>

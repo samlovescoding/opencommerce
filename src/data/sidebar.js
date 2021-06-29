@@ -22,16 +22,19 @@ const sidebar = [
   link("Dashboard", "layout-fill", "#"),
 
   heading("Products"),
-  seller("View", "shield-star-fill", "/seller/products"),
-  seller("Add", "shield-star-fill", "/seller/products/create"),
+  seller("Catalog", "bag-fill", "/seller/products/view"),
+  seller("Add Product", "plus-circle-fill", "/seller/products/create"),
+  seller("Categories", "filter-fill", "/seller/category"),
+  link("Orders", "list-thumb-alt-fill", "/seller/orders"),
+  seller("Shop", "building-fill", "/seller/shop"),
 
-  heading("Orders"),
-  link("View", "user-alt-fill", "#"),
+  // heading("Orders"),
   // link("Menu", "star-fill", "#", [
   //   link("Sub Menu 1", "menu-circled", "#"),
   //   link("Sub Menu 2", "video-fill", "#"),
   //   link("Sub Menu 3", "video", "#"),
   // ]),
+
   heading("Account"),
   seller("Change Password", "shield-star-fill", "/seller/change-password"),
   link("Logout", "signout", "/logout"),

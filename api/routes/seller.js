@@ -44,13 +44,11 @@ router.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const seller = await Seller.create({
+    await Seller.create({
       name,
       email,
       password: hashedPassword,
     });
-
-    await seller.save();
 
     success(res, "Registered successfully");
   } catch (e) {

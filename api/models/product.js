@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const categorySchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   name: String,
 });
 
@@ -28,7 +27,7 @@ const shippingSchema = mongoose.Schema({
   price: Number,
 });
 
-const attributesSchema = mongoose.schema({
+const attributesSchema = mongoose.Schema({
   name: String,
   value: String,
 });
@@ -46,6 +45,7 @@ const schema = mongoose.Schema(
     inventory: inventorySchema,
     shipping: shippingSchema,
     attributes: [attributesSchema],
+    seller: mongoose.Schema.Types.ObjectId,
   },
   { timestamps: true }
 );

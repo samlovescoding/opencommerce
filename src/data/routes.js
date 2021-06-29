@@ -19,7 +19,7 @@ const routes = [
   route("/seller/login", SellerLogin),
   route("/seller/register", SellerRegister),
   route("/seller/change-password", SellerChangePassword),
-  route("/seller/products", SellerProducts),
+  route("/seller/products/view", SellerProducts),
   route("/seller/products/create", SellerProductsCreate),
   route("/seller/products/:id/edit", SellerProductsEdit),
   route("/logout", Logout),
