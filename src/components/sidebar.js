@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import useUser from "../services/useUser";
 
-function Heading({ title, admin }) {
+function Heading({ title, type }) {
   const { user } = useUser();
-  if (admin && user.role !== "admin") return null;
+  if (type && type !== "user" && user.type !== type) return null;
 
   return (
     <li className="nk-menu-heading">
