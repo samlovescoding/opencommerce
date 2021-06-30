@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Open Commerce
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Open commerce is an online ecommerce website with multi vendor support. It is completely free and open source.
 
 ## Available Scripts
 

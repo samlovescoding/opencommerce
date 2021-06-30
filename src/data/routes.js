@@ -11,6 +11,9 @@ import SellerOrders from "../pages/seller/products/orders";
 import SellerCategories from "../pages/seller/products/categories";
 import SellerShop from "../pages/seller/products/shop";
 import Logout from "../pages/auth/logout";
+import AdminLogin from "../pages/auth/admin/login";
+import AdminRegister from "../pages/auth/admin/register";
+import AdminChangePassword from "../pages/auth/admin/register";
 
 function route(path, component, exact = true) {
   return { path, component, exact };
@@ -30,6 +33,11 @@ const routes = [
   route("/seller/shop", SellerShop),
   route("/logout", Logout),
   route("/seller", Seller),
+
+  // Admin
+  route("/admin/login", AdminLogin),
+  route("/admin/register", AdminRegister),
+  route("/admin/change-password", AdminChangePassword),
 ];
 
 export default routes;
