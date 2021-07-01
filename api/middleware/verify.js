@@ -21,7 +21,7 @@ module.exports = (type) => {
     }
 
     if (type === "admin") {
-      req.seller = await Admin.findOne({ _id: payload.id });
+      req.admin = await Admin.findOne({ _id: payload.id });
     }
 
     next();

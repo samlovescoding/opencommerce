@@ -4,12 +4,21 @@ export default function DataTable({
   columns,
   rows,
   scoped = {},
-  count = 10,
-  onChangeCount = () => {},
+  page = 1,
+  limit = 10,
+  totalCount = null,
+  query = "",
+  onChangeLimit = () => {},
   onChangePage = () => {},
+  onChangeQuery = () => {},
 }) {
-  const [current, setCurrent] = useState(0);
-  const [query, setQuery] = useState("");
+  const [current, setCurrent] = useState(page - 1);
+  // const [query, setQuery] = useState(query);
+
+  if (totalCount === null) {
+    totalCount = rows.length;
+  }
+
   return (
     <>
       <div className="d-flex mb-4">
@@ -17,7 +26,9 @@ export default function DataTable({
           type="search"
           className="form-control w-30"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            onChangeQuery(e.target.value);
+          }}
           placeholder="Search..."
         />
       </div>
@@ -33,18 +44,18 @@ export default function DataTable({
         </thead>
         <tbody>
           {rows
-            .filter((row) => {
-              if (query !== "") {
-                return Object.values(row).some((column) => {
-                  return column
-                    .toString()
-                    .toLowerCase()
-                    .includes(query.toLowerCase());
-                });
-              }
-              return true;
-            })
-            .slice(current * count, current * count + count)
+            // .filter((row) => {
+            //   if (query !== "") {
+            //     return Object.values(row).some((column) => {
+            //       return column
+            //         .toString()
+            //         .toLowerCase()
+            //         .includes(query.toLowerCase());
+            //     });
+            //   }
+            //   return true;
+            // })
+            // .slice(current * limit, current * limit + limit)
             .map((row, rowIndex) => (
               <tr key={rowIndex}>
                 {columns.map((column, index) => {
@@ -65,20 +76,20 @@ export default function DataTable({
         <button
           className="btn btn-outline-primary"
           onClick={() => {
-            setCurrent(current - 1);
-            onChangePage(current - 1);
+            setCurrent(parseInt(page) - 1);
+            onChangePage(parseInt(page) - 1);
           }}
-          disabled={current <= 0}
+          disabled={parseInt(page) <= 0}
         >
           Previous
         </button>
         <button
           className="btn btn-outline-primary"
           onClick={() => {
-            setCurrent(current + 1);
-            onChangePage(current + 1);
+            setCurrent(parseInt(page) + 1);
+            onChangePage(parseInt(page) + 1);
           }}
-          disabled={current >= Math.floor(rows.length / count) - 1}
+          disabled={parseInt(page) > Math.floor(totalCount / limit) - 1}
         >
           Next
         </button>

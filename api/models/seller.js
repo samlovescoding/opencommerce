@@ -20,6 +20,10 @@ const schema = mongoose.Schema(
     name: String,
     email: String,
     password: String,
+    status: {
+      type: String,
+      default: "Pending",
+    },
     shop: shopSchema,
   },
   { timestamps: true }

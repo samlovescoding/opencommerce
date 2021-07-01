@@ -31,7 +31,8 @@ function admin(title, icon, to = "#/", children = null) {
 }
 
 const sidebar = [
-  link("Dashboard", "layout-fill", "#"),
+  seller("Dashboard", "layout-fill", "/seller"),
+  admin("Dashboard", "layout-fill", "/admin"),
 
   heading("Products"),
   seller("Catalog", "bag-fill", "/seller/products/view"),

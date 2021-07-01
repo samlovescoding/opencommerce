@@ -19,6 +19,12 @@ router.post("/login", async (req, res) => {
     const passwordVerified = await bcrypt.compare(password, seller.password);
     if (!passwordVerified) throw ErrorResponse("Password is incorrect.");
 
+    if (seller.status !== "Approved") {
+      if (seller.status === "Rejected")
+        throw ErrorResponse("Your application was rejected by the admin.");
+      throw ErrorResponse("You are not approved by the admin.");
+    }
+
     const token = jwt.sign(
       { id: seller._id, type: "seller" },
       config.jwt.secret
@@ -59,8 +65,21 @@ router.post("/register", async (req, res) => {
 
 router.get("/", verify("admin"), async (req, res) => {
   try {
-    const sellers = await Seller.find();
-    success(res, sellers);
+    let { limit, query, page } = req.query;
+    limit = parseInt(limit);
+    page = parseInt(page);
+    if (limit > 20) {
+      limit = 20;
+    }
+    const sellers = await Seller.find({
+      name: { $regex: query, $options: "i" },
+    })
+      .limit(limit)
+      .skip(limit * page);
+    const totalCount = await Seller.count({
+      name: { $regex: query, $options: "i" },
+    });
+    success(res, { sellers, totalCount });
   } catch (e) {
     error(res, e);
   }
@@ -83,6 +102,29 @@ router.patch("/shop", verify("seller"), async (req, res) => {
     );
     // await req.seller.update();
     success(res, "Updated");
+  } catch (e) {
+    error(res, e);
+  }
+});
+
+router.patch("/:id/status", verify("admin"), async (req, res) => {
+  try {
+    const seller = await Seller.findOne({ _id: req.params.id });
+    if (!seller) throw ErrorResponse("Seller not found.");
+    seller.status = req.body.status;
+    await seller.save();
+    success(res, "Updated successfully");
+  } catch (e) {
+    error(res, e);
+  }
+});
+
+router.delete("/:id", verify("admin"), async (req, res) => {
+  try {
+    const seller = await Seller.findOne({ _id: req.params.id });
+    if (!seller) throw ErrorResponse("Seller not found.");
+    await seller.remove();
+    success(res, "Deleted successfully");
   } catch (e) {
     error(res, e);
   }

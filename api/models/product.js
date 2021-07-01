@@ -46,6 +46,10 @@ const schema = mongoose.Schema(
     shipping: shippingSchema,
     attributes: [attributesSchema],
     seller: mongoose.Schema.Types.ObjectId,
+    status: {
+      type: String,
+      default: "Pending",
+    },
   },
   { timestamps: true }
 );

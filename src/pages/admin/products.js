@@ -1,12 +1,12 @@
-import Dashboard from "../../../layouts/dashboard";
-import api from "../../../services/api";
+import Dashboard from "../../layouts/dashboard";
+import api from "../../services/api";
 import useUrlState from "@ahooksjs/use-url-state";
 import { useEffect, useState } from "react";
-import sweetError from "../../../services/sweetError";
+import sweetError from "../../services/sweetError";
 import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
 
-export default function SellerProducts() {
-  const history = useHistory();
+export default function AdminProducts() {
   const [loading, setLoading] = useState(true);
   const [queryParams, setQueryParams] = useUrlState({
     query: "",
@@ -27,7 +27,7 @@ export default function SellerProducts() {
   async function loadProducts() {
     try {
       setLoading(true);
-      const { products, totalCount } = await api.get("/product/seller", {
+      const { products, totalCount } = await api.get("/product/admin", {
         params: queryParams,
       });
       setProducts(products);
@@ -38,18 +38,15 @@ export default function SellerProducts() {
     }
   }
 
-  async function onClickDelete(product) {
+  async function onClickUpdateStatus(status, product) {
     try {
-      await api.delete(`/product/${product._id}`);
+      await api.patch(`/product/${product._id}/status`, { status });
+      swal({
+        title: "Success",
+        icon: "success",
+        text: "Product status was updated.",
+      });
       loadProducts();
-    } catch (e) {
-      sweetError(e);
-    }
-  }
-
-  async function onClickEdit(product) {
-    try {
-      history.push("/seller/products/" + product._id + "/edit");
     } catch (e) {
       sweetError(e);
     }
@@ -87,22 +84,25 @@ export default function SellerProducts() {
                       <img alt="" src={api.image(product.image)} height="100" />
                     </td>
                     <td>{product.price.sale}</td>
-
                     <td>{product.inventory.quantity}</td>
                     <td>{product.status}</td>
                     <td>
                       <div className="d-flex">
                         <button
                           className="btn btn-sm btn-warning mr-2"
-                          onClick={() => onClickEdit(product)}
+                          onClick={() =>
+                            onClickUpdateStatus("Approved", product)
+                          }
                         >
-                          Edit
+                          Approve
                         </button>
                         <button
                           className="btn btn-sm btn-danger"
-                          onClick={() => onClickDelete(product)}
+                          onClick={() =>
+                            onClickUpdateStatus("Rejected", product)
+                          }
                         >
-                          Delete
+                          Reject
                         </button>
                       </div>
                     </td>

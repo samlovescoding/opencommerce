@@ -1,5 +1,4 @@
 import { Redirect } from "react-router";
-import Home from "../pages/dashboard/home";
 import Seller from "../pages/seller";
 import SellerProducts from "../pages/seller/products/view";
 import SellerProductsCreate from "../pages/seller/products/create";
@@ -13,9 +12,10 @@ import SellerShop from "../pages/seller/products/shop";
 import Logout from "../pages/auth/logout";
 import AdminLogin from "../pages/auth/admin/login";
 import AdminRegister from "../pages/auth/admin/register";
-import AdminChangePassword from "../pages/auth/admin/register";
+import AdminChangePassword from "../pages/admin/password";
 import Admin from "../pages/admin";
 import AdminSellers from "../pages/admin/sellers";
+import AdminProducts from "../pages/admin/products";
 
 function route(path, component, exact = true) {
   return { path, component, exact };
@@ -23,7 +23,7 @@ function route(path, component, exact = true) {
 
 const routes = [
   route("/", () => <Redirect to="/seller/login" />),
-  route("/dashboard", Home),
+  // route("/dashboard", Home),
   route("/seller/login", SellerLogin),
   route("/seller/register", SellerRegister),
   route("/seller/change-password", SellerChangePassword),
@@ -40,6 +40,7 @@ const routes = [
   route("/admin", Admin),
   route("/admin/sellers", AdminSellers),
   route("/admin/login", AdminLogin),
+  route("/admin/products/view", AdminProducts),
   route("/admin/register", AdminRegister),
   route("/admin/change-password", AdminChangePassword),
 ];
