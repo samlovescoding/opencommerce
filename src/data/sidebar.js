@@ -43,7 +43,7 @@ const sidebar = [
   admin("Orders", "list-thumb-alt-fill", "/admin/orders"),
 
   heading("Sellers", "admin"),
-  admin("Register", "list-thumb-alt-fill", "/admin/sellers"),
+  admin("Accounts", "users-fill", "/admin/sellers"),
 
   // heading("Orders"),
   // link("Menu", "star-fill", "#", [

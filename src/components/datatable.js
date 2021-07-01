@@ -1,6 +1,13 @@
 import { useState } from "react";
 
-export default function DataTable({ columns, rows, scoped = {}, count = 10 }) {
+export default function DataTable({
+  columns,
+  rows,
+  scoped = {},
+  count = 10,
+  onChangeCount = () => {},
+  onChangePage = () => {},
+}) {
   const [current, setCurrent] = useState(0);
   const [query, setQuery] = useState("");
   return (
@@ -57,14 +64,20 @@ export default function DataTable({ columns, rows, scoped = {}, count = 10 }) {
       <div className="mt-4 d-flex justify-content-between">
         <button
           className="btn btn-outline-primary"
-          onClick={() => setCurrent(current - 1)}
+          onClick={() => {
+            setCurrent(current - 1);
+            onChangePage(current - 1);
+          }}
           disabled={current <= 0}
         >
           Previous
         </button>
         <button
           className="btn btn-outline-primary"
-          onClick={() => setCurrent(current + 1)}
+          onClick={() => {
+            setCurrent(current + 1);
+            onChangePage(current + 1);
+          }}
           disabled={current >= Math.floor(rows.length / count) - 1}
         >
           Next

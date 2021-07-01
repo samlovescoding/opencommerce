@@ -15,6 +15,7 @@ import AdminLogin from "../pages/auth/admin/login";
 import AdminRegister from "../pages/auth/admin/register";
 import AdminChangePassword from "../pages/auth/admin/register";
 import Admin from "../pages/admin";
+import AdminSellers from "../pages/admin/sellers";
 
 function route(path, component, exact = true) {
   return { path, component, exact };
@@ -37,6 +38,7 @@ const routes = [
 
   // Admin
   route("/admin", Admin),
+  route("/admin/sellers", AdminSellers),
   route("/admin/login", AdminLogin),
   route("/admin/register", AdminRegister),
   route("/admin/change-password", AdminChangePassword),

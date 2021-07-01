@@ -57,6 +57,15 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.get("/", verify("admin"), async (req, res) => {
+  try {
+    const sellers = await Seller.find();
+    success(res, sellers);
+  } catch (e) {
+    error(res, e);
+  }
+});
+
 router.get("/shop", verify("seller"), async (req, res) => {
   try {
     success(res, req.seller.shop);
