@@ -1,9 +1,9 @@
 import { ErrorMessage, Formik } from "formik";
 import { useState } from "react";
-import Dashboard from "../../../layouts/dashboard";
-import sweetError from "../../../services/sweetError";
+import Dashboard from "../../layouts/dashboard";
+import sweetError from "../../services/sweetError";
 import * as yup from "yup";
-import api from "../../../services/api";
+import api from "../../services/api";
 import { useEffect } from "react";
 
 function CategoryRow({ category, categories, reloadCategories }) {
@@ -54,28 +54,7 @@ function CategoryRow({ category, categories, reloadCategories }) {
 }
 
 export default function SellerCategories() {
-  const [categories, setCategories] = useState([
-    {
-      id: "2ad2e82ef93d2ad2e82df9385",
-      name: "Electronics",
-      parent: null,
-    },
-    {
-      id: "2ad2e82ef93d2ad2e82df9386",
-      name: "Mobiles",
-      parent: "2ad2e82ef93d2ad2e82df9385",
-    },
-    {
-      id: "2ad2e82ef93d2ad2e82df9387",
-      name: "Televisions",
-      parent: "2ad2e82ef93d2ad2e82df9385",
-    },
-    {
-      id: "2ad2e82ef93d2ad2e82df9388",
-      name: "Fashion",
-      parent: null,
-    },
-  ]);
+  const [categories, setCategories] = useState([]);
 
   const initialValues = {
     name: "",

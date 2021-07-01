@@ -37,14 +37,15 @@ const sidebar = [
   heading("Products"),
   seller("Catalog", "bag-fill", "/seller/products/view"),
   seller("Add Product", "plus-circle-fill", "/seller/products/create"),
-  seller("Categories", "filter-fill", "/seller/categories"),
   seller("Orders", "list-thumb-alt-fill", "/seller/orders"),
   seller("Shop", "building-fill", "/seller/shop"),
   admin("Products", "bag-fill", "/admin/products/view"),
+  admin("Categories", "filter-fill", "/admin/categories"),
   admin("Orders", "list-thumb-alt-fill", "/admin/orders"),
 
   heading("Sellers", "admin"),
   admin("Accounts", "users-fill", "/admin/sellers"),
+  seller("Coupons", "target", "/seller/coupons"),
 
   // heading("Orders"),
   // link("Menu", "star-fill", "#", [
