@@ -57,6 +57,28 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.get("/shop", verify("seller"), async (req, res) => {
+  try {
+    success(res, req.seller.shop);
+  } catch (e) {
+    error(res, e);
+  }
+});
+
+router.patch("/shop", verify("seller"), async (req, res) => {
+  try {
+    // req.seller = { ...req.seller, shop: req.body };
+    await Seller.findOneAndUpdate(
+      { _id: req.seller._id },
+      { $set: { shop: req.body } }
+    );
+    // await req.seller.update();
+    success(res, "Updated");
+  } catch (e) {
+    error(res, e);
+  }
+});
+
 router.patch("/change-password", verify("seller"), async (req, res) => {
   try {
     const { currentPassword, password } = req.body;

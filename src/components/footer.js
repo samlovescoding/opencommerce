@@ -7,14 +7,7 @@ export default function Footer({ auth = false, fluid = true }) {
       <div className={cx({ container: !fluid, "container-fluid": fluid })}>
         <div className="nk-footer-wrap">
           <div className="nk-footer-copyright">
-            &copy; 2020 Dashlite. Made by{" "}
-            <a
-              href="https://samlovescoding.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              samlovescoding
-            </a>
+            &copy; 2020 OpenCommerce. All Rights Reserved.
           </div>
           <div className="nk-footer-links">
             <ul className="nav nav-sm">

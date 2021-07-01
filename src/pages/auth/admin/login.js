@@ -75,7 +75,7 @@ export default function AdminLogin() {
           <div className="form-note-s2 text-center pt-4">
             {" "}
             New on our platform?{" "}
-            <Link to="/seller/register">Create an account</Link>
+            <Link to="/admin/register">Create an account</Link>
           </div>
           <div className="text-center pt-4 pb-3">
             <h6 className="overline-title overline-title-sap">

@@ -5,6 +5,7 @@ const path = require("path");
 router.use("/seller", require("./seller"));
 router.use("/admin", require("./admin"));
 router.use("/product", require("./product"));
+router.use("/category", require("./category"));
 router.use("/image", require("./image"));
 router.use("/uploads", express.static(path.join("api", "uploads")));
 
