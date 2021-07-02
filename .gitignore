@@ -24,4 +24,4 @@ yarn-error.log*
 .env
 *.log
 
-/api/uploads
+# /api/uploads
