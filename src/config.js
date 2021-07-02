@@ -1,5 +1,5 @@
 const config = {
-  api: "http://localhost:4000/",
+  api: "http://223.178.212.204:4000/",
 };
 
 export default config;
